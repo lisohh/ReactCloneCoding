@@ -9,11 +9,14 @@
   <script type="text/babel">
     function App() {
       //1. state를 만들었어
-      const [minutes, setMinutes] = React.useState(0);
+      const [amount, setAmount] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
       const onChange = (event) => {
-        setMinutes(event.target.value);
+        setAmount(event.target.value);
       };
-      const reset = () => setMinutes(0);
+      const reset = () => setAmount(0);
+      const onFlip = () => reset();
+      setFlipped((current) => !current);
       return (
         <div>
           <div>
@@ -21,25 +24,31 @@
             <label htmlfor="minutes">Minutes</label>
             <input
               // 2. input의 value를 state로 연결해줬지
-              value={minutes}
+              value={flipped ? amount * 60 : amount}
               id="minutes"
               placeholder="Minutes"
               type="number"
               //3. onChange함수를 만들어줬어
               onChange={onChange}
+              //props를 전달
+              disabled={flipped}
             />
           </div>
 
           <div>
             <label htmlfor="hours">Hours</label>
             <input
-              value={Math.round(minutes / 60)}
+              value={flipped ? amount : Math.round(amount / 60)}
               id="hours"
               placeholder="Hours"
               type="number"
+              //props를 전달
+              disabled={!flipped}
+              onChange={onChange}
             />
           </div>
           <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>Flip</button>
         </div>
       );
     }
