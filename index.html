@@ -8,13 +8,36 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     function App() {
+      //1. state를 만들었어
+      const [minutes, setMinutes] = React.useState(0);
+      const onChange = (event) => {
+        setMinutes(event.target.value);
+      };
       return (
         <div>
-          <h1>Super Converter</h1>
-          <label htmlfor="minutes">Minutes</label>
-          <input id="minutes" placeholder="Minutes" type="number" />
-          <label htmlfor="hours">Hours</label>
-          <input id="hours" placeholder="Hours" type="number" />
+          <div>
+            <h1>Super Converter</h1>
+            <label htmlfor="minutes">Minutes</label>
+            <input
+              // 2. input의 value를 state로 연결해줬지
+              value={minutes}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              //3. onChange함수를 만들어줬어
+              onChange={onChange}
+            />
+          </div>
+
+          <div>
+            <label htmlfor="hours">Hours</label>
+            <input
+              value={Math.round(minutes / 60)}
+              id="hours"
+              placeholder="Hours"
+              type="number"
+            />
+          </div>
         </div>
       );
     }
