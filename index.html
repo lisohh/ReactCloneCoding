@@ -7,7 +7,7 @@
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function SaveBtn() {
+    function Btn(props) {
       return (
         <button
           style={{
@@ -18,31 +18,17 @@
             borderRadius: 10,
           }}
         >
-          Save Changes
+          {props.text}
         </button>
       );
     }
-    function ConfirmBtn() {
-      return (
-        <button
-          style={{
-            backgroundColor: "tomato",
-            color: "white",
-            padding: "10px 20px",
-            border: 0,
-            borderRadius: 10,
-          }}
-        >
-          Confirm
-        </button>
-      );
-    }
+
     function App() {
       return (
         <div>
-          <SaveBtn />
+          <Btn text="Save Changes" />
           //이걸 바로 함수형 컴포넌트라고 부르는거야
-          <ConfirmBtn />
+          <Btn text="Continue" />
         </div>
       );
     }
